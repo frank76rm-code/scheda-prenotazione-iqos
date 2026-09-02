@@ -19,8 +19,9 @@ button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:11px;backg
 </head>
 <body>
 <main class="card">
-<header><div class="brand">Tabaccheria Petralia</div><h1>Prenota IQOS ILUMA i</h1><p>Compila la richiesta e inviala in modo riservato su WhatsApp.</p></header>
+<header><div class="brand">Tabaccheria Petralia</div><h1>Prenota IQOS ILUMA i</h1><p>Compila la richiesta: sarà registrata nel nostro archivio privato.</p></header>
 <form id="bookingForm">
+  <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
   <div class="grid">
     <div><label for="name">Nome e cognome *</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
     <div><label for="phone">Telefono / WhatsApp *</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="24"></div>
@@ -32,27 +33,40 @@ button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:11px;backg
   <div id="eligibility" class="info">Promozione riservata ai nuovi consumatori maggiorenni. Acquisto scontato solo dal 14/09/2026.</div>
   <label class="check"><input name="adult" type="checkbox" value="Sì" required> Dichiaro di essere maggiorenne.</label>
   <label class="check" style="margin-top:9px"><input name="privacy" type="checkbox" value="Sì" required> Acconsento al trattamento dei dati esclusivamente per questa prenotazione.</label>
-  <button id="submitBtn" type="submit">Invia prenotazione su WhatsApp</button>
+  <button id="submitBtn" type="submit">Registra prenotazione</button>
   <div id="status" role="status" aria-live="polite"></div>
 </form>
-<footer>Il sito non salva i dati inseriti. La richiesta viene inviata direttamente alla Tabaccheria Petralia tramite WhatsApp.</footer>
+<footer>I dati sono registrati nel Foglio Google privato della Tabaccheria Petralia. Nessun cliente può consultare le prenotazioni.</footer>
 </main>
 <script>
 const form=document.querySelector('#bookingForm'),status=document.querySelector('#status'),btn=document.querySelector('#submitBtn'),eligibility=document.querySelector('#eligibility');
 document.querySelector('#pickup').value='2026-09-14';
 form.addEventListener('change',e=>{if(e.target.name==='registered'){const old=e.target.value==='Sì';eligibility.className='info'+(old?' error':'');eligibility.textContent=old?'Se sei già registrato, lo sconto promozionale non può essere applicato.':'Requisito dichiarato: nuovo consumatore, soggetto a verifica in negozio.'}});
-form.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(form));const msg=[
-'PRENOTAZIONE IQOS ILUMA i',
-'',
-'Nome: '+d.name,
-'Telefono: '+d.phone,
-'Già registrato IQOS: '+d.registered,
-'Colore: '+d.color,
-'Data ritiro: '+d.pickup,
-'Note: '+(d.notes||'Nessuna'),
-'Maggiorenne: '+d.adult,
-'Consenso privacy: '+d.privacy
-].join('\n');status.textContent='Apertura di WhatsApp…';window.location.href='https://wa.me/39069090211?text='+encodeURIComponent(msg)});
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyY4KBqEPmVc8UVmvq3liwq7XYaVo6PM7QpRh2T4tzWhTGvkCmWG3ddCAZgu6hxk8_u9w/exec';
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!form.reportValidity())return;
+  const d=Object.fromEntries(new FormData(form));
+  btn.disabled=true;
+  status.textContent='Registrazione in corso…';
+  try{
+    await fetch(ENDPOINT,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(d)
+    });
+    status.textContent='Prenotazione registrata correttamente.';
+    form.reset();
+    document.querySelector('#pickup').value='2026-09-14';
+    eligibility.className='info';
+    eligibility.textContent='Promozione riservata ai nuovi consumatori maggiorenni. Acquisto scontato solo dal 14/09/2026.';
+  }catch(err){
+    status.textContent='Invio non riuscito. Riprova oppure contattaci al 06 9090211.';
+  }finally{
+    btn.disabled=false;
+  }
+});
 </script>
 </body>
 </html>
