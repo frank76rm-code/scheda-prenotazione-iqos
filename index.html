@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#081111">
 <title>Prenota IQOS — Tabaccheria Petralia</title>
 <style>
-:root{--bg:#071011;--card:#0d1a1b;--gold:#e8b43b;--teal:#48cdbd;--text:#f7f7f3;--muted:#aab8b6;--line:#29403f;--danger:#ff8b82}
+:root{--card:#0d1a1b;--gold:#e8b43b;--teal:#48cdbd;--text:#f7f7f3;--muted:#aab8b6;--line:#29403f;--danger:#ff8b82}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(160deg,#0b2021,#030708 70%);color:var(--text);font:16px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
 .card{width:min(680px,calc(100% - 24px));margin:24px auto;background:var(--card);border:1px solid rgba(232,180,59,.55);border-radius:20px;box-shadow:0 20px 65px rgba(0,0,0,.5);overflow:hidden}
 header{padding:26px 24px 20px;border-bottom:1px solid var(--line)}.brand{font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}h1{margin:6px 0 5px;font-size:clamp(27px,6vw,38px)}header p{margin:0;color:var(--muted)}
@@ -19,7 +19,7 @@ button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:11px;backg
 </head>
 <body>
 <main class="card">
-<header><div class="brand">Tabaccheria Petralia</div><h1>Prenota IQOS ILUMA i</h1><p>Compila la richiesta: sarà registrata nel nostro archivio privato.</p></header>
+<header><div class="brand">Tabaccheria Petralia</div><h1>Prenota IQOS ILUMA i</h1><p>Compila la richiesta e inviala direttamente su WhatsApp.</p></header>
 <form id="bookingForm">
   <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
   <div class="grid">
@@ -36,20 +36,22 @@ button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:11px;backg
   <button id="submitBtn" type="submit">Registra e invia su WhatsApp</button>
   <div id="status" role="status" aria-live="polite"></div>
 </form>
-<footer>I dati sono registrati nel Foglio Google privato della Tabaccheria Petralia. Nessun cliente può consultare le prenotazioni.</footer>
+<footer>La prenotazione viene memorizzata nel browser e il messaggio viene inviato tramite WhatsApp.</footer>
 </main>
 <script>
+const STORAGE_KEY='iqos_petralia_prenotazioni_v1';
 const form=document.querySelector('#bookingForm'),status=document.querySelector('#status'),btn=document.querySelector('#submitBtn'),eligibility=document.querySelector('#eligibility');
 document.querySelector('#pickup').value='2026-09-14';
 form.addEventListener('change',e=>{if(e.target.name==='registered'){const old=e.target.value==='Sì';eligibility.className='info'+(old?' error':'');eligibility.textContent=old?'Se sei già registrato, lo sconto promozionale non può essere applicato.':'Requisito dichiarato: nuovo consumatore, soggetto a verifica in negozio.'}});
-const ENDPOINT='https://script.google.com/macros/s/AKfycbyY4KBqEPmVc8UVmvq3liwq7XYaVo6PM7QpRh2T4tzWhTGvkCmWG3ddCAZgu6hxk8_u9w/exec';
-form.addEventListener('submit',async e=>{
+function getBookings(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+function saveBooking(d){const list=getBookings();list.unshift({...d,id:Date.now(),createdAt:new Date().toISOString()});localStorage.setItem(STORAGE_KEY,JSON.stringify(list));}
+form.addEventListener('submit',e=>{
   e.preventDefault();
   if(!form.reportValidity())return;
   const d=Object.fromEntries(new FormData(form));
+  if(d.website)return;
   const msg=[
-    'PRENOTAZIONE IQOS ILUMA i',
-    '',
+    'PRENOTAZIONE IQOS ILUMA i','',
     'Nome: '+d.name,
     'Telefono: '+d.phone,
     'Già registrato IQOS: '+d.registered,
@@ -59,16 +61,13 @@ form.addEventListener('submit',async e=>{
     'Maggiorenne: '+d.adult,
     'Consenso privacy: '+d.privacy
   ].join('\n');
-  btn.disabled=true;
-  status.textContent='Salvataggio e apertura di WhatsApp…';
   try{
-    await fetch(ENDPOINT,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify(d)
-    });
-  }catch(err){}
+    saveBooking(d);
+    status.textContent='Prenotazione registrata. Apertura WhatsApp…';
+  }catch(err){
+    status.textContent='Impossibile registrare sul dispositivo. Apro comunque WhatsApp…';
+  }
+  btn.disabled=true;
   window.location.href='https://wa.me/39069090211?text='+encodeURIComponent(msg);
   setTimeout(()=>{btn.disabled=false;status.textContent='Completa l’invio del messaggio su WhatsApp.'},1200);
 });
