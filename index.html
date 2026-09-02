@@ -1,45 +1,63 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#071113">
-  <title>Prenotazione IQOS — Tabaccheria Petralia</title>
-  <style>
-    :root{--ink:#061012;--gold:#f4bd39;--teal:#42d5c2;--muted:#b8c5c3}
-    *{box-sizing:border-box}html{background:var(--ink)}body{margin:0;color:#fff;font:16px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 0,#123638 0,#071113 42%,#020607 100%);min-height:100vh}
-    .wrap{width:min(900px,calc(100% - 24px));margin:24px auto 50px}.hero{padding:28px;border:1px solid rgba(244,189,57,.55);border-radius:24px 24px 0 0;background:linear-gradient(145deg,rgba(14,35,36,.98),rgba(3,10,11,.98));box-shadow:0 24px 70px #000;text-align:center}
-    .brand{font-weight:950;letter-spacing:.07em;font-size:clamp(28px,7vw,58px);line-height:.92}.brand span{display:block;color:var(--gold)}.tag{margin:22px auto 0;color:var(--teal);font-weight:850;text-transform:uppercase;letter-spacing:.1em}
-    h1{margin:10px 0 4px;font-size:clamp(24px,5vw,40px)}.lead{max-width:680px;margin:0 auto;color:#dce7e5}.prices{display:flex;justify-content:center;align-items:center;gap:20px;margin:22px 0 8px}.old{color:var(--muted)}.old b{text-decoration:line-through;font-size:25px}.new{color:var(--gold);font-size:46px;font-weight:950}
-    .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.rule{border:1px solid #365452;border-radius:12px;padding:12px;background:rgba(255,255,255,.025);font-size:13px}.rule b{display:block;color:var(--teal);font-size:14px;margin-bottom:3px}
-    .form-shell{padding:42px 24px;background:linear-gradient(145deg,#0e2324,#071113);border:1px solid rgba(244,189,57,.55);border-top:0;border-radius:0 0 24px 24px;text-align:center}.pause{max-width:620px;margin:auto;padding:30px 22px;border:1px solid rgba(67,214,196,.45);border-radius:18px;background:rgba(255,255,255,.03)}.pause h2{margin:0 0 12px;color:var(--gold);font-size:clamp(24px,5vw,34px)}.pause p{margin:0;color:#dce7e5}.contact{display:inline-block;margin-top:22px;padding:13px 18px;border-radius:12px;background:linear-gradient(135deg,#ffd766,#e9a916);color:#111;text-decoration:none;font-weight:900}
-    .privacy{display:flex;gap:10px;align-items:flex-start;margin:18px 10px 0;color:var(--muted);font-size:13px}.lock{color:var(--teal);font-size:20px;line-height:1}footer{text-align:center;color:#91a3a0;font-size:12px;margin-top:20px}
-    @media(max-width:650px){.wrap{width:100%;margin:0}.hero{border-radius:0;padding:24px 16px}.form-shell{border-radius:0;border-left:0;border-right:0}.rules{grid-template-columns:1fr}.prices{gap:14px}.new{font-size:40px}.privacy{padding:0 12px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#03090a">
+<title>Prenotazione IQOS — Tabaccheria Petralia</title>
+<style>
+:root{--black:#03090a;--panel:#071516;--gold:#f2b932;--gold2:#ffd96a;--teal:#45d2c0;--white:#f7f7f4;--muted:#b9c4c2}
+*{box-sizing:border-box}html{background:var(--black)}body{margin:0;min-height:100vh;color:var(--white);font:16px/1.35 Arial,Helvetica,sans-serif;background:
+radial-gradient(circle at 12% 42%,rgba(29,171,158,.18),transparent 25%),
+radial-gradient(circle at 88% 8%,rgba(242,185,50,.12),transparent 22%),
+linear-gradient(150deg,#061416 0,#020708 55%,#071112 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle,rgba(255,217,106,.7) 0 1px,transparent 1.5px);background-size:93px 87px}
+.page{position:relative;width:min(1050px,calc(100% - 24px));margin:22px auto 48px;border:1px solid rgba(242,185,50,.66);border-radius:28px;background:linear-gradient(155deg,rgba(8,25,27,.97),rgba(2,7,8,.98));box-shadow:0 28px 90px #000,0 0 42px rgba(242,185,50,.08);overflow:hidden}
+.topline{height:4px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);box-shadow:0 0 18px var(--gold)}
+.hero{padding:36px 34px 32px;text-align:center;position:relative}.ornament{display:flex;align-items:center;gap:13px;color:var(--gold);margin:0 auto 16px;max-width:880px}.ornament:before,.ornament:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}.ornament:after{transform:scaleX(-1)}.gem{transform:rotate(45deg);width:11px;height:11px;background:var(--gold);box-shadow:18px -18px 0 -3px var(--gold),-18px 18px 0 -3px var(--gold)}
+.brand{font-weight:950;letter-spacing:.035em;line-height:.84;text-transform:uppercase;text-shadow:0 4px 24px #000}.brand .white{display:block;font-size:clamp(34px,7vw,76px)}.brand .gold{display:block;font-size:clamp(48px,10vw,105px);color:var(--gold);background:linear-gradient(180deg,var(--gold2),#d89513);-webkit-background-clip:text;background-clip:text;color:transparent}
+.date{margin:30px auto 7px;color:var(--teal);font-weight:900;font-size:clamp(17px,3vw,25px);letter-spacing:.08em;text-transform:uppercase}.headline{margin:0;font-size:clamp(38px,7vw,72px);line-height:.88;text-transform:uppercase}.headline span{display:block;color:var(--gold);margin-top:9px}.subtitle{font-size:clamp(16px,2.6vw,24px);font-weight:800;text-transform:uppercase;margin:18px 0 0}
+.promo-grid{display:grid;grid-template-columns:1.35fr .75fr;gap:18px;padding:0 28px 28px}.visual,.price-card,.notice{border-radius:22px}.visual{position:relative;min-height:390px;border:1px solid rgba(69,210,192,.58);overflow:hidden;background:radial-gradient(circle at 50% 55%,rgba(25,126,119,.58),rgba(4,15,16,.25) 45%,#03090a 75%);display:grid;place-items:center}
+.ring{width:min(72vw,330px);aspect-ratio:1;border:4px solid var(--gold);border-radius:50%;box-shadow:0 0 16px var(--gold),inset 0 0 25px rgba(69,210,192,.45),0 0 70px rgba(69,210,192,.35);display:grid;place-items:center}.device{font-weight:950;text-align:center;text-transform:uppercase;letter-spacing:.08em}.device b{display:block;font-size:clamp(28px,5vw,47px);color:#fff}.device span{font-size:clamp(20px,4vw,34px);color:var(--teal)}
+.platform{position:absolute;bottom:25px;width:72%;height:28px;border:2px solid var(--gold);border-radius:50%;background:#092121;box-shadow:0 0 18px var(--gold),0 15px 35px #000}
+.price-card{border:2px solid var(--teal);background:rgba(2,8,9,.9);overflow:hidden;text-align:center}.price-block{padding:22px 16px}.price-label{font-weight:850;text-transform:uppercase}.price{font-size:clamp(62px,11vw,102px);line-height:1;font-weight:950}.price.old{color:#fff}.divider{height:2px;background:var(--gold);margin:0 18px}.price.gold{color:var(--gold)}.date-box{padding:18px;background:linear-gradient(145deg,var(--gold2),#dea019);color:#061012;font-size:20px;font-weight:950;text-transform:uppercase}.date-box strong{display:block;font-size:38px}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 28px 28px}.rule{border:1px solid rgba(242,185,50,.7);border-radius:17px;padding:18px;background:rgba(0,0,0,.3)}.icon{width:44px;height:44px;border:2px solid var(--teal);border-radius:50%;display:grid;place-items:center;color:var(--teal);font-weight:950;margin-bottom:12px}.rule b{display:block;color:var(--gold);text-transform:uppercase;margin-bottom:5px}.rule span{color:#e7eded}
+.notice{margin:0 28px 30px;padding:30px 22px;text-align:center;border:1px solid var(--gold);background:linear-gradient(145deg,rgba(242,185,50,.1),rgba(69,210,192,.07));box-shadow:inset 0 0 32px rgba(242,185,50,.04)}.notice h2{margin:0 0 9px;color:var(--gold);font-size:clamp(25px,5vw,38px);text-transform:uppercase}.notice p{margin:0 auto;color:#e3ecea;max-width:640px}.call{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:15px 22px;border-radius:14px;color:#071113;background:linear-gradient(180deg,var(--gold2),#dfa116);font-size:20px;font-weight:950;text-decoration:none;box-shadow:0 8px 28px rgba(242,185,50,.25)}
+.privacy{margin:0 28px 24px;padding-top:20px;border-top:1px solid rgba(69,210,192,.45);color:var(--muted);font-size:13px;text-align:center}footer{text-align:center;padding:0 24px 28px;color:#91a3a0;font-size:12px}
+@media(max-width:720px){.page{width:100%;margin:0;border-radius:0;border-left:0;border-right:0}.hero{padding:27px 16px 24px}.promo-grid{grid-template-columns:1fr;padding:0 14px 18px}.visual{min-height:320px}.rules{grid-template-columns:1fr;padding:0 14px 18px}.rule{display:grid;grid-template-columns:48px 1fr;column-gap:13px}.rule .icon{grid-row:1/3}.notice{margin:0 14px 22px}.privacy{margin:0 18px 20px}.price-card{display:grid;grid-template-columns:1fr 1fr}.date-box{grid-column:1/-1}.divider{display:none}}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="brand">TABACCHERIA <span>PETRALIA</span></div>
-      <div class="tag">Dal 14/09 riparte la promo</div>
-      <h1>Prenota IQOS ILUMA i</h1>
-      <p class="lead">Compila il modulo per richiedere la prenotazione. Riceverai conferma dalla Tabaccheria Petralia.</p>
-      <div class="prices"><div class="old">Listino<br><b>59 €</b></div><div class="new">29 €</div></div>
-      <div class="rules">
-        <div class="rule"><b>Solo nuovi consumatori</b>Se sei già registrato, lo sconto non può essere applicato.</div>
-        <div class="rule"><b>Acquisto dal 14/09</b>La prenotazione può essere inviata subito; acquisto e ritiro scontato solo dalla data indicata.</div>
-        <div class="rule"><b>Conferma necessaria</b>Colore e promozione sono soggetti a disponibilità e verifica dei requisiti.</div>
-      </div>
-    </section>
-    <section class="form-shell" aria-label="Stato prenotazioni">
-      <div class="pause">
-        <h2>Modulo in aggiornamento</h2>
-        <p>Le prenotazioni online saranno nuovamente disponibili a breve. Nel frattempo puoi contattare direttamente la Tabaccheria Petralia.</p>
-        <a class="contact" href="tel:069090211">Chiama 06 9090211</a>
-      </div>
-    </section>
-    <div class="privacy"><span class="lock">●</span><span>Le informazioni inviate sono riservate e utilizzate esclusivamente per gestire la prenotazione. I clienti non possono consultare nominativi o prenotazioni altrui.</span></div>
-    <footer>Tabaccheria Petralia · WhatsApp 06 9090211</footer>
-  </main>
+<main class="page">
+<div class="topline"></div>
+<section class="hero">
+  <div class="ornament"><i class="gem"></i></div>
+  <div class="brand"><span class="white">Tabaccheria</span><span class="gold">Petralia</span></div>
+  <div class="date">Dal 14/09</div>
+  <h1 class="headline">Riparte <span>la promo</span></h1>
+  <p class="subtitle">L’occasione più conveniente dell’anno!</p>
+</section>
+<section class="promo-grid">
+  <div class="visual"><div class="ring"><div class="device"><b>IQOS</b><span>ILUMA i</span></div></div><div class="platform"></div></div>
+  <div class="price-card">
+    <div class="price-block"><div class="price-label">Prezzo di listino</div><div class="price old">59€</div></div>
+    <div class="divider"></div>
+    <div class="price-block"><div class="price-label" style="color:var(--gold)">Prezzo promozionale</div><div class="price gold">29€</div></div>
+    <div class="date-box">Acquisto promozionale solo dal<strong>14/09</strong></div>
+  </div>
+</section>
+<section class="rules">
+  <div class="rule"><div class="icon">18+</div><div><b>Solo nuovi consumatori</b><span>Promozione riservata esclusivamente ai maggiorenni.</span></div></div>
+  <div class="rule"><div class="icon">✓</div><div><b>Verifica necessaria</b><span>Se sei già registrato, lo sconto non può essere applicato.</span></div></div>
+  <div class="rule"><div class="icon">14</div><div><b>Acquisto dal 14/09</b><span>Il prodotto scontato potrà essere acquistato solo dalla data indicata.</span></div></div>
+</section>
+<section class="notice">
+  <h2>Modulo in aggiornamento</h2>
+  <p>Stiamo attivando il nuovo sistema privato di prenotazione, senza pubblicità. Le prenotazioni online torneranno disponibili a breve.</p>
+  <a class="call" href="tel:069090211">☎ 06 9090211</a>
+</section>
+<div class="privacy">I dati delle prenotazioni saranno visibili esclusivamente alla Tabaccheria Petralia. Nessun cliente potrà consultare nominativi o richieste altrui.</div>
+<footer>Prodotto non privo di rischi e contenente nicotina, sostanza che crea dipendenza. Solo per maggiorenni.</footer>
+</main>
 </body>
 </html>
