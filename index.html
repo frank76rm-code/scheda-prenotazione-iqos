@@ -33,43 +33,88 @@ button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:11px;backg
   <div id="eligibility" class="info">Promozione riservata ai nuovi consumatori maggiorenni. Acquisto scontato solo dal 14/09/2026.</div>
   <label class="check"><input name="adult" type="checkbox" value="Sì" required> Dichiaro di essere maggiorenne.</label>
   <label class="check" style="margin-top:9px"><input name="privacy" type="checkbox" value="Sì" required> Acconsento al trattamento dei dati esclusivamente per questa prenotazione.</label>
-  <button id="submitBtn" type="submit">Registra e invia su WhatsApp</button>
+  <button id="submitBtn" type="submit">Invia prenotazione su WhatsApp</button>
   <div id="status" role="status" aria-live="polite"></div>
 </form>
-<footer>La prenotazione viene memorizzata nel browser e il messaggio viene inviato tramite WhatsApp.</footer>
+<footer>La prenotazione viene inviata a Tabaccheria Petralia tramite WhatsApp.</footer>
 </main>
 <script>
-const STORAGE_KEY='iqos_petralia_prenotazioni_v1';
-const form=document.querySelector('#bookingForm'),status=document.querySelector('#status'),btn=document.querySelector('#submitBtn'),eligibility=document.querySelector('#eligibility');
-document.querySelector('#pickup').value='2026-09-14';
-form.addEventListener('change',e=>{if(e.target.name==='registered'){const old=e.target.value==='Sì';eligibility.className='info'+(old?' error':'');eligibility.textContent=old?'Se sei già registrato, lo sconto promozionale non può essere applicato.':'Requisito dichiarato: nuovo consumatore, soggetto a verifica in negozio.'}});
-function getBookings(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
-function saveBooking(d){const list=getBookings();list.unshift({...d,id:Date.now(),createdAt:new Date().toISOString()});localStorage.setItem(STORAGE_KEY,JSON.stringify(list));}
+const form=document.querySelector('#bookingForm');
+const status=document.querySelector('#status');
+const btn=document.querySelector('#submitBtn');
+const eligibility=document.querySelector('#eligibility');
+const pickup=document.querySelector('#pickup');
+pickup.value='2026-09-14';
+
+form.addEventListener('change',e=>{
+  if(e.target.name==='registered'){
+    const old=e.target.value==='Sì';
+    eligibility.className='info'+(old?' error':'');
+    eligibility.textContent=old
+      ?'Se sei già registrato, lo sconto promozionale non può essere applicato.'
+      :'Requisito dichiarato: nuovo consumatore, soggetto a verifica in negozio.';
+  }
+});
+
+function makeId(){
+  if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();
+  return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+}
+
+function encodePayload(obj){
+  const bytes=new TextEncoder().encode(JSON.stringify(obj));
+  let binary='';
+  for(const b of bytes)binary+=String.fromCharCode(b);
+  return btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+
+function archiveBaseUrl(){
+  const base=location.href.split('#')[0].split('?')[0];
+  return base.slice(0,base.lastIndexOf('/')+1)+'prenotazioni.html';
+}
+
 form.addEventListener('submit',e=>{
   e.preventDefault();
   if(!form.reportValidity())return;
-  const d=Object.fromEntries(new FormData(form));
-  if(d.website)return;
+
+  const raw=Object.fromEntries(new FormData(form));
+  if(raw.website)return;
+
+  const booking={
+    id:makeId(),
+    createdAt:new Date().toISOString(),
+    name:raw.name.trim(),
+    phone:raw.phone.trim(),
+    registered:raw.registered,
+    color:raw.color,
+    pickup:raw.pickup,
+    notes:(raw.notes||'').trim(),
+    adult:raw.adult,
+    privacy:raw.privacy
+  };
+
+  const importUrl=archiveBaseUrl()+'#add='+encodePayload(booking);
   const msg=[
     'PRENOTAZIONE IQOS ILUMA i','',
-    'Nome: '+d.name,
-    'Telefono: '+d.phone,
-    'Già registrato IQOS: '+d.registered,
-    'Colore: '+d.color,
-    'Data ritiro: '+d.pickup,
-    'Note: '+(d.notes||'Nessuna'),
-    'Maggiorenne: '+d.adult,
-    'Consenso privacy: '+d.privacy
+    'Nome: '+booking.name,
+    'Telefono: '+booking.phone,
+    'Già registrato IQOS: '+booking.registered,
+    'Colore: '+booking.color,
+    'Data ritiro: '+booking.pickup,
+    'Note: '+(booking.notes||'Nessuna'),
+    'Maggiorenne: '+booking.adult,
+    'Consenso privacy: '+booking.privacy,'',
+    'REGISTRA NELL’ARCHIVIO:',
+    importUrl
   ].join('\n');
-  try{
-    saveBooking(d);
-    status.textContent='Prenotazione registrata. Apertura WhatsApp…';
-  }catch(err){
-    status.textContent='Impossibile registrare sul dispositivo. Apro comunque WhatsApp…';
-  }
+
+  status.textContent='Apertura WhatsApp… invia il messaggio per completare la prenotazione.';
   btn.disabled=true;
   window.location.href='https://wa.me/39069090211?text='+encodeURIComponent(msg);
-  setTimeout(()=>{btn.disabled=false;status.textContent='Completa l’invio del messaggio su WhatsApp.'},1200);
+  setTimeout(()=>{
+    btn.disabled=false;
+    status.textContent='Per completare la prenotazione, invia il messaggio aperto su WhatsApp.';
+  },1200);
 });
 </script>
 </body>
