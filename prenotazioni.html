@@ -6,28 +6,115 @@
 <meta name="theme-color" content="#081111">
 <title>Archivio Prenotazioni IQOS — Tabaccheria Petralia</title>
 <style>
-:root{--card:#0d1a1b;--gold:#e8b43b;--teal:#48cdbd;--text:#f7f7f3;--muted:#aab8b6;--line:#29403f;--danger:#ff8b82}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(160deg,#0b2021,#030708 70%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{width:min(1050px,calc(100% - 24px));margin:24px auto}.panel{background:var(--card);border:1px solid rgba(232,180,59,.55);border-radius:20px;box-shadow:0 20px 65px rgba(0,0,0,.5);overflow:hidden}header{padding:24px;border-bottom:1px solid var(--line)}.brand{font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}h1{margin:6px 0 4px;font-size:clamp(26px,5vw,38px)}header p{margin:0;color:var(--muted)}.tools{display:grid;grid-template-columns:1fr auto;gap:10px;padding:16px 24px;border-bottom:1px solid var(--line)}input{width:100%;padding:12px 13px;border:1px solid #3b5553;border-radius:10px;background:#071011;color:#fff;font:inherit;outline:none}button{border:0;border-radius:10px;padding:11px 14px;font-weight:850;cursor:pointer;background:linear-gradient(180deg,#f2c85a,#d99d1d);color:#111}.danger{background:#54201f;color:#fff;border:1px solid #8c3d38}.summary{display:flex;gap:10px;flex-wrap:wrap;padding:14px 24px;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:999px;padding:6px 10px}.list{padding:0 24px 24px;display:grid;gap:12px}.item{border:1px solid var(--line);border-radius:14px;padding:16px;background:#091415}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.name{font-size:18px;font-weight:900}.when{font-size:12px;color:var(--muted);text-align:right}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.field{background:rgba(255,255,255,.025);border-radius:10px;padding:10px}.label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}.notes{margin-top:10px;padding:10px;border-left:3px solid var(--gold);background:rgba(232,180,59,.06);border-radius:7px}.actions{margin-top:12px;display:flex;justify-content:flex-end}.empty{text-align:center;color:var(--muted);padding:46px 20px}.back{display:inline-block;margin-top:10px;color:var(--teal);text-decoration:none;font-weight:800}footer{padding:0 24px 22px;color:var(--muted);font-size:12px;text-align:center}
+:root{--card:#0d1a1b;--gold:#e8b43b;--teal:#48cdbd;--text:#f7f7f3;--muted:#aab8b6;--line:#29403f;--danger:#ff8b82;--ok:#7de2b8}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(160deg,#0b2021,#030708 70%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{width:min(1050px,calc(100% - 24px));margin:24px auto}.panel{background:var(--card);border:1px solid rgba(232,180,59,.55);border-radius:20px;box-shadow:0 20px 65px rgba(0,0,0,.5);overflow:hidden}header{padding:24px;border-bottom:1px solid var(--line)}.brand{font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}h1{margin:6px 0 4px;font-size:clamp(26px,5vw,38px)}header p{margin:0;color:var(--muted)}.notice{display:none;margin:16px 24px 0;padding:12px 14px;border-left:3px solid var(--ok);border-radius:8px;background:rgba(125,226,184,.08);font-weight:800}.notice.error{border-color:var(--danger);background:rgba(255,139,130,.08)}.tools{display:grid;grid-template-columns:1fr auto;gap:10px;padding:16px 24px;border-bottom:1px solid var(--line)}input{width:100%;padding:12px 13px;border:1px solid #3b5553;border-radius:10px;background:#071011;color:#fff;font:inherit;outline:none}button{border:0;border-radius:10px;padding:11px 14px;font-weight:850;cursor:pointer;background:linear-gradient(180deg,#f2c85a,#d99d1d);color:#111}.danger{background:#54201f;color:#fff;border:1px solid #8c3d38}.summary{display:flex;gap:10px;flex-wrap:wrap;padding:14px 24px;color:var(--muted)}.badge{border:1px solid var(--line);border-radius:999px;padding:6px 10px}.list{padding:0 24px 24px;display:grid;gap:12px}.item{border:1px solid var(--line);border-radius:14px;padding:16px;background:#091415}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.name{font-size:18px;font-weight:900}.when{font-size:12px;color:var(--muted);text-align:right}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.field{background:rgba(255,255,255,.025);border-radius:10px;padding:10px}.label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}.notes{margin-top:10px;padding:10px;border-left:3px solid var(--gold);background:rgba(232,180,59,.06);border-radius:7px}.actions{margin-top:12px;display:flex;justify-content:flex-end}.empty{text-align:center;color:var(--muted);padding:46px 20px}.back{display:inline-block;margin-top:10px;color:var(--teal);text-decoration:none;font-weight:800}footer{padding:0 24px 22px;color:var(--muted);font-size:12px;text-align:center}
 @media(max-width:700px){.wrap{width:100%;margin:0}.panel{border-radius:0;border-left:0;border-right:0}.tools{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top{display:block}.when{text-align:left;margin-top:4px}}@media(max-width:430px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap"><main class="panel">
-<header><div class="brand">Tabaccheria Petralia</div><h1>Archivio Prenotazioni IQOS</h1><p>Elenco delle prenotazioni memorizzate su questo dispositivo.</p><a class="back" href="./">← Torna alla prenotazione</a></header>
+<header><div class="brand">Tabaccheria Petralia</div><h1>Archivio Prenotazioni IQOS</h1><p>Apri qui i link ricevuti su WhatsApp per aggiungere automaticamente le prenotazioni.</p><a class="back" href="./">← Torna alla prenotazione</a></header>
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
 <div class="tools"><input id="search" type="search" placeholder="Cerca nome, telefono, colore…"><button id="clear" class="danger" type="button">Svuota archivio</button></div>
 <div class="summary"><span class="badge" id="count">0 prenotazioni</span><span class="badge" id="newCount">0 nuovi consumatori</span></div>
 <div id="list" class="list"></div>
-<footer>I dati restano salvati esclusivamente nel browser di questo dispositivo.</footer>
+<footer>Questo archivio è salvato nel browser del dispositivo con cui apri i link ricevuti su WhatsApp.</footer>
 </main></div>
 <script>
 const STORAGE_KEY='iqos_petralia_prenotazioni_v1';
-const listEl=document.querySelector('#list'),searchEl=document.querySelector('#search'),countEl=document.querySelector('#count'),newCountEl=document.querySelector('#newCount');
-function getBookings(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+const listEl=document.querySelector('#list');
+const searchEl=document.querySelector('#search');
+const countEl=document.querySelector('#count');
+const newCountEl=document.querySelector('#newCount');
+const noticeEl=document.querySelector('#notice');
+
+function getBookings(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}
+  catch(e){return[]}
+}
+function setBookings(list){localStorage.setItem(STORAGE_KEY,JSON.stringify(list))}
 function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function dateIt(v){if(!v)return'-';const d=new Date(v);return isNaN(d)?v:d.toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'})}
-function render(){const all=getBookings();const q=searchEl.value.trim().toLowerCase();const rows=all.filter(x=>JSON.stringify(x).toLowerCase().includes(q));countEl.textContent=all.length+' '+(all.length===1?'prenotazione':'prenotazioni');const nc=all.filter(x=>x.registered==='No').length;newCountEl.textContent=nc+' nuovi consumatori';if(!rows.length){listEl.innerHTML='<div class="empty">'+(all.length?'Nessun risultato.':'Nessuna prenotazione registrata su questo dispositivo.')+'</div>';return}listEl.innerHTML=rows.map(x=>`<article class="item"><div class="top"><div class="name">${esc(x.name)}</div><div class="when">Registrata: ${esc(dateIt(x.createdAt))}</div></div><div class="grid"><div class="field"><span class="label">Telefono</span>${esc(x.phone)}</div><div class="field"><span class="label">Già registrato IQOS</span>${esc(x.registered)}</div><div class="field"><span class="label">Colore</span>${esc(x.color)}</div><div class="field"><span class="label">Ritiro previsto</span>${esc(x.pickup)}</div><div class="field"><span class="label">Maggiorenne</span>${esc(x.adult)}</div><div class="field"><span class="label">Privacy</span>${esc(x.privacy)}</div></div>${x.notes?`<div class="notes"><span class="label">Note</span>${esc(x.notes)}</div>`:''}<div class="actions"><button class="danger" type="button" onclick="removeBooking(${Number(x.id)})">Elimina</button></div></article>`).join('')}
-function removeBooking(id){if(!confirm('Eliminare questa prenotazione?'))return;localStorage.setItem(STORAGE_KEY,JSON.stringify(getBookings().filter(x=>Number(x.id)!==Number(id))));render()}
-searchEl.addEventListener('input',render);document.querySelector('#clear').addEventListener('click',()=>{if(!getBookings().length)return;if(confirm('Vuoi cancellare tutte le prenotazioni salvate su questo dispositivo?')){localStorage.removeItem(STORAGE_KEY);render()}});render();
+
+function decodePayload(value){
+  let b64=value.replace(/-/g,'+').replace(/_/g,'/');
+  while(b64.length%4)b64+='=';
+  const binary=atob(b64);
+  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function showNotice(text,error=false){
+  noticeEl.textContent=text;
+  noticeEl.className='notice'+(error?' error':'');
+  noticeEl.style.display='block';
+}
+
+function importFromHash(){
+  if(!location.hash.startsWith('#add='))return;
+  try{
+    const booking=decodePayload(location.hash.slice(5));
+    if(!booking||!booking.id||!booking.name||!booking.phone||!booking.registered||!booking.color||!booking.pickup){
+      throw new Error('Dati incompleti');
+    }
+    const all=getBookings();
+    const exists=all.some(x=>String(x.id)===String(booking.id));
+    if(exists){
+      showNotice('Questa prenotazione era già presente nell’archivio.');
+    }else{
+      all.unshift(booking);
+      setBookings(all);
+      showNotice('Prenotazione di '+booking.name+' registrata nell’archivio.');
+    }
+    history.replaceState(null,'',location.pathname+location.search);
+  }catch(err){
+    showNotice('Il link di registrazione non è valido o è incompleto.',true);
+  }
+}
+
+function render(){
+  const all=getBookings();
+  const q=searchEl.value.trim().toLowerCase();
+  const rows=all.filter(x=>JSON.stringify(x).toLowerCase().includes(q));
+  countEl.textContent=all.length+' '+(all.length===1?'prenotazione':'prenotazioni');
+  const nc=all.filter(x=>x.registered==='No').length;
+  newCountEl.textContent=nc+' nuovi consumatori';
+  if(!rows.length){
+    listEl.innerHTML='<div class="empty">'+(all.length?'Nessun risultato.':'Nessuna prenotazione ancora registrata su questo dispositivo.')+'</div>';
+    return;
+  }
+  listEl.innerHTML=rows.map(x=>`<article class="item">
+    <div class="top"><div class="name">${esc(x.name)}</div><div class="when">Registrata: ${esc(dateIt(x.createdAt))}</div></div>
+    <div class="grid">
+      <div class="field"><span class="label">Telefono</span>${esc(x.phone)}</div>
+      <div class="field"><span class="label">Già registrato IQOS</span>${esc(x.registered)}</div>
+      <div class="field"><span class="label">Colore</span>${esc(x.color)}</div>
+      <div class="field"><span class="label">Ritiro previsto</span>${esc(x.pickup)}</div>
+      <div class="field"><span class="label">Maggiorenne</span>${esc(x.adult)}</div>
+      <div class="field"><span class="label">Privacy</span>${esc(x.privacy)}</div>
+    </div>
+    ${x.notes?`<div class="notes"><span class="label">Note</span>${esc(x.notes)}</div>`:''}
+    <div class="actions"><button class="danger" type="button" onclick="removeBooking('${esc(x.id)}')">Elimina</button></div>
+  </article>`).join('')
+}
+
+function removeBooking(id){
+  if(!confirm('Eliminare questa prenotazione?'))return;
+  setBookings(getBookings().filter(x=>String(x.id)!==String(id)));
+  render();
+}
+
+searchEl.addEventListener('input',render);
+document.querySelector('#clear').addEventListener('click',()=>{
+  if(!getBookings().length)return;
+  if(confirm('Vuoi cancellare tutte le prenotazioni salvate su questo dispositivo?')){
+    localStorage.removeItem(STORAGE_KEY);
+    render();
+  }
+});
+
+importFromHash();
+render();
 </script>
 </body>
 </html>
